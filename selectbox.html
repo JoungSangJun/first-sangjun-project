@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //배열에 과목 넣기
+        var big_subject0 = new Array("-선택-", "");
+        var big_subject1 = new Array("경상학부", "경찰학부", "관광학부", "기독교학부", "ICT학부");
+        var big_subject2 = new Array("기독교인성", "국어과목", "세계화과목", "정보화과복", "제1영역");
+
+        var major0 = new Array("-선택-", "");
+        var major1 = new Array("경영과학", "경영통계학", "글로벌유통론", "투자론");
+        var major2 = new Array("교정학개론", "과학수사실무", "행정학개론", "경찰학개론");
+        var major3 = new Array("카지노산업론", "커피의 이해", "관광학원론", "외식경영론");
+        var major4 = new Array("기독교상담학개론", "모세오경", "아동상담", "진로상담");
+        var major5 = new Array("소프트웨어공학", "이산수학", "알고리즘", "c언어프로그래밍");
+
+        var refinement0 = new Array("-선택-", "");
+        var refinement1 = new Array("신앙과 논리", "기독교세계관", "사람다운 사람의 길");
+        var refinement2 = new Array("발표와 토론", "과학기술 글쓰기", "예술표현과 글쓰기");
+        var refinement3 = new Array("영어 읽기와 쓰기", "영어 듣기와 말하기", "실전 영어회화");
+        var refinement4 = new Array("컴퓨터논리작성", "디지털영상의 이해와 활용", "인터넷프로그래밍 이해와 활용");
+        var refinement5 = new Array("문학의 이해", "언어와 문화", "세계문화사", "한국사상과 문화");
+
+        function bigsubjectchange(item) { //두번째 select box
+            var temp, i = 0, j = 0;
+            var ccount, cselect;
+
+            temp = document.signform.big_subject;
+
+            for (i = (temp.options.length - 1); i > 0; i--) {
+                temp.options[i] = null;
+            }
+
+            eval('ccount = big_subject' + item + '.length');
+
+            for (j = 0; j < ccount; j++) {
+                eval('cselect = big_subject' + item + '[' + j + '];');
+                temp.options[j] = new Option(cselect, cselect);
+            }
+            temp.options[0].selected = true;
+            return true;
+        }
+
+        function subjectchange(item) { //세번째 select box
+            var temp, i = 0, j = 0;
+            var ccount, cselect;
+            item += 1;
+            temp = document.signform.subject;
+
+            if (document.signform.bigsubject.options.selectedIndex == 1) { //전공 선택시
+                for (i = (temp.options.length - 1); i > 0; i--) {
+                    temp.options[i] = null;
+                }
+
+                eval('ccount = major' + item + '.length');
+
+                for (j = 0; j < ccount; j++) {
+                    eval('cselect = major' + item + '[' + j + '];');
+                    temp.options[j] = new Option(cselect, cselect);
+                }
+                temp.options[0].selected = true;
+                return true;
+            } else if (document.signform.bigsubject.options.selectedIndex == 2) { //교양 선택시
+                for (i = (temp.options.length - 1); i > 0; i--) {
+                    temp.options[i] = null;
+                }
+
+                eval('ccount = refinement' + item + '.length');
+
+                for (j = 0; j < ccount; j++) {
+                    eval('cselect = refinement' + item + '[' + j + '];');
+                    temp.options[j] = new Option(cselect, cselect);
+                }
+                temp.options[0].selected = true;
+                return true;
+            }
+        }
+    </script>
+
+    <form name=signform>
+
+        <table cellpadding=1>
+            <tr>
+                <td>1차</td>
+                <td>2차</td>
+                <td>3차</td>
+            </tr>
+            <tr>
+                <td>
+                    <select name=bigsubject
+                        onChange=javascript:bigsubjectchange(document.signform.bigsubject.options.selectedIndex);>
+                        <option selected value="">-선택-</option>
+                        <option value=전공>전공</option>
+                        <option value=교양>교양</option>
+
+                    </select>
+                </td>
+                <td>
+                    <select name=big_subject size=1
+                        onChange=javascript:subjectchange(document.signform.big_subject.options.selectedIndex);>
+                        <option selected value="">-선택-</option>
+                        <option value=""></option>
+                    </select>
+                </td>
+                <td>
+                    <select name=subject size=1>
+                        <option selected value="">-선택-</option>
+                        <option value=""></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

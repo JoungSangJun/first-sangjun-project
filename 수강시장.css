@@ -1,0 +1,194 @@
+#header{
+    text-align: center;
+
+}
+
+#login-1{
+    display: none;
+}
+
+#login ,#login-1{
+    padding : 30px;
+    position: absolute;
+}
+
+.ID .PW{
+    padding: 100px;
+}
+
+#login ul{
+    list-style: none;
+    padding-inline-start: 20px;
+}
+
+#login  label{
+    margin-right: 28px;
+    font-weight: bold;
+}
+
+.loginBt ,.logoutBt{
+    margin-top: 10px;
+    margin-right: 18px;
+    width: 167px;
+    font-weight: bold;
+    color: #d9eef7;
+	border: solid 1px #3b5eaa;
+	background: #3b5eaa;
+}
+
+.add_bt, .search_bt, .delete_bt, .exchange_bt{
+    margin-top: 10px;
+    width: 70px;
+    font-weight: bold;
+    color: #d9eef7;
+	border: solid 1px #3b5eaa;
+	background: #3b5eaa;
+}
+
+#topMenu {          
+    height: 30px; 
+    width: 1528px;
+    background-color: #3b5eaa;
+    }
+
+input[type = "radio"] + label {                       
+    list-style: none;          
+    color: white;           
+    background-color: #3b5eaa; 
+    float: left;                
+    line-height: 30px;          
+    vertical-align: middle;    
+    text-align: center;    
+    cursor: pointer;
+    width: 25%; 
+}
+
+input[type = "radio"]:checked + label {                       
+    background-color: #d9e13b; 
+
+}
+
+#topMenu .menu1:hover, .menu2:hover, .menu3:hover, .menu4:hover{          
+    color: #3b5eaa;    
+    background-color: #d9e13b;               
+}
+
+#topMenu .menu1, .menu2, .menu3, .menu4{                             
+    text-decoration:none;                     
+    color: white;                             
+    display: block;                           
+    width: 355px;                              
+    font-size: 12px;                           
+    font-weight: bold;                         
+    font-family: "Trebuchet MS", Dotum, Arial; 
+}
+
+#enrollment , #exchange{
+    position: absolute;
+    top : 30%;
+    left: 22%;
+}
+
+#enrollment label, select, .enroll{
+   margin : 15px;
+}
+
+#exchange label, select, .enroll{
+    margin : 15px;
+ }
+
+#enrollment fieldset{
+    margin-bottom: 30px;
+ }
+
+ #exchange fieldset{
+    margin-bottom: 30px;
+ }
+
+input[id="menu1"]:checked~#exchange,
+input[id="menu3"]:checked~#Timetable,
+input[id="menu2"]:checked~#enrollment,
+input[id="menu4"]:checked~#use{
+    display: block;
+}
+
+#topMenu > div{
+    display: none;
+}
+
+#topMenu input[type ="radio"]{
+   display: none;
+}
+
+#login legend{
+    text-align: center;
+    font-weight: bold;
+}
+
+#login-1 legend{
+    text-align: center;
+    font-weight: bold;
+}
+
+img{
+    text-align: left;
+    display: inline;
+}
+
+#notice fieldset{
+    width: 200px;
+    height: 200px;
+    display: inline;
+    padding-bottom : 30px;
+}
+
+#Timetable{
+    margin-left: 380px;
+    margin-top: 80px;
+    position: absolute;
+    margin-bottom: 500px;
+    
+}
+
+#Timetable * {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    width : 100px;
+    height: 10px;
+}
+
+#Timetable th, td {
+    padding: 20px;
+}
+
+#Timetable th {
+    text-align: center;
+}
+
+#notice{
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 30px;
+}
+
+#use{
+    position: absolute;
+    margin-left: 500px;
+    margin-top: 100px;
+    text-align: left;
+}
+
+#add_table th, #exchange_table1 th{
+     padding: 40px;
+}
+
+#add_table1 * , #exchange_table1 *{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#add_table1, #exchange_table1{
+    padding-bottom: 50px;
+}
+

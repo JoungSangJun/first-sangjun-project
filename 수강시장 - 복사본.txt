@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수강 시장</title>
+
+</head>
+
+<body>
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="수강시장.css">
+    <script>
+        //전체 과목 정보
+        var big_subject0 = new Array("-선택-", "");
+        var big_subject1 = new Array("경상학부", "경찰학부", "관광학부", "기독교학부", "ICT학부");
+        var big_subject2 = new Array("기독교인성", "국어과목", "세계화과목", "정보화과복", "제1영역");
+
+        var major0 = new Array("-선택-", "");
+        var major1 = new Array("경영과학", "경영통계학", "글로벌유통론", "투자론");
+        var major2 = new Array("교정학개론", "과학수사실무", "행정학개론", "경찰학개론");
+        var major3 = new Array("카지노산업론", "커피의 이해", "관광학원론", "외식경영론");
+        var major4 = new Array("기독교상담학개론", "모세오경", "아동상담", "진로상담");
+        var major5 = new Array("소프트웨어공학", "이산수학", "알고리즘", "c언어프로그래밍");
+
+        var refinement0 = new Array("-선택-", "");
+        var refinement1 = new Array("신앙과 논리", "기독교세계관", "사람다운 사람의 길");
+        var refinement2 = new Array("발표와 토론", "과학기술 글쓰기", "예술표현과 글쓰기");
+        var refinement3 = new Array("영어 읽기와 쓰기", "영어 듣기와 말하기", "실전 영어회화");
+        var refinement4 = new Array("컴퓨터논리작성", "디지털영상의 이해와 활용", "인터넷프로그래밍 이해와 활용");
+        var refinement5 = new Array("문학의 이해", "언어와 문화", "세계문화사", "한국사상과 문화");
+
+
+        //내 과목 정보
+        var 웹프로그래밍 = [910801, "웹프로그래밍", 3, "강경우","월요일 2,3/본부504"];
+        var 소프트웨어공학 = [138101, "소프트웨어공학", 3, "이승화","월요일 6,7,8/본부513"];
+        var 대학예배 = [239309, "대학예배", 0, " ","화요일 3/교목실"];
+        var 자료구조론 = [218603, "자료구조론", 3, "이성훈","화요일 5,6/본부511"];
+        var 유닉스시스템 = [219401, "유닉스시스템", 3, "유진호","수요일 6,7,8,9/본부520"];
+        var C언어응용프로그래밍 = [684901, "C언어응용프로그래밍", 3, "최미영","수요일 1,2,3,4/본부205"];
+        var 실전영어회화 = [854717, "실전영어회화(B)", 2, "WILIAM","목요일 3,4/본부216"];
+        var 성경과인간이해2 = [852810, "성경과인간이해2", 1, "박효진","목요일 5/진리502"];
+        
+       
+
+
+
+
+        function OnLogin() { //로그인
+            var id = document.getElementById("LoginId").value;
+            var pass = document.getElementById("LoginPw").value;
+            if (id !== "1") {
+                alert("잘못된 아이디입니다.");
+            } else if (pass !== "1") {
+                alert("비밀번호가 틀립니다.");
+            } else if (id == "1" && pass == "1") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("login-1").style.display = "block";
+            }
+        }
+
+        function OnLogout() { //로그아웃
+            document.getElementById("login").style.display = "block";
+            document.getElementById("login-1").style.display = "none";
+            var input = document.getElementById("LoginId");
+            input.value = null;
+            var input = document.getElementById("LoginPw");
+            input.value = null;
+        }
+
+        
+
+
+
+        function My_subject(item) { //보유 과목 select box에 추가
+            eval('My_subject' + item);
+        }
+
+        function bigsubjectchange(item) { //두번째 select box
+            var temp, i = 0, j = 0;
+            var ccount, cselect;
+
+            temp = document.signform.big_subject;
+
+            for (i = (temp.options.length - 1); i > 0; i--) {
+                temp.options[i] = null;
+            }
+
+            eval('ccount = big_subject' + item + '.length');
+
+            for (j = 0; j < ccount; j++) {
+                eval('cselect = big_subject' + item + '[' + j + '];');
+                temp.options[j] = new Option(cselect, cselect);
+            }
+            temp.options[0].selected = true;
+            return true;
+        }
+
+        function subjectchange(item) { //세번째 select box
+            var temp, i = 0, j = 0;
+            var ccount, cselect;
+            item += 1;
+            temp = document.signform.subject;
+
+            if (document.signform.bigsubject.options.selectedIndex == 1) { //전공 선택시
+                for (i = (temp.options.length - 1); i > 0; i--) {
+                    temp.options[i] = null;
+                }
+
+                eval('ccount = major' + item + '.length');
+
+                for (j = 0; j < ccount; j++) {
+                    eval('cselect = major' + item + '[' + j + '];');
+                    temp.options[j] = new Option(cselect, cselect);
+                }
+                temp.options[0].selected = true;
+                return true;
+            } else if (document.signform.bigsubject.options.selectedIndex == 2) { //교양 선택시
+                for (i = (temp.options.length - 1); i > 0; i--) {
+                    temp.options[i] = null;
+                }
+
+                eval('ccount = refinement' + item + '.length');
+
+                for (j = 0; j < ccount; j++) {
+                    eval('cselect = refinement' + item + '[' + j + '];');
+                    temp.options[j] = new Option(cselect, cselect);
+                }
+                temp.options[0].selected = true;
+                return true;
+            }
+        }
+
+        function add() {
+            var My = document.getElementById("My_subject"); 
+            var My_1 = My.options[My.selectedIndex].value; //선택한 내 과목 value값 넣기
+
+            var Want = document.getElementById("subject");
+            var Want_1 = Want.options[Want.selectedIndex].value;
+
+         
+            var My = document.createElement("tr"); // tr엘리먼트 생성 <tr></tr>
+            var My1 = document.createElement("td"); // td엘리먼트 생성 <td></td>
+            var My2 = document.createElement("td"); // <td></td>
+            var My3 = document.createElement("td"); // <td></td>
+            var My4 = document.createElement("td"); // <td></td>
+            var My5 = document.createElement("td"); // <td></td>
+            var My6 = document.createElement("td"); // <td></td>
+            var My7 = document.createElement("td"); // <td></td>
+
+            var Want = document.createElement("tr"); // tr엘리먼트 생성 <tr></tr>
+            var Want1 = document.createElement("td"); // td엘리먼트 생성 <td></td>
+            var Want2 = document.createElement("td"); // <td></td>
+            var Want3 = document.createElement("td"); // <td></td>
+            var Want4 = document.createElement("td"); // <td></td>
+            var Want5 = document.createElement("td"); // <td></td>
+            var Want6 = document.createElement("td"); // <td></td>
+            var Want7 = document.createElement("td"); // <td></td>
+
+            //td에 값넣기위해서 innerHTML사용
+            My1.innerHTML = "1";
+            My2.innerHTML = "My";
+            My3.innerHTML = eval(My_1)[0];
+            My4.innerHTML = eval(My_1)[1];
+            My5.innerHTML = eval(My_1)[2];
+            My6.innerHTML = eval(My_1)[3];
+            My7.innerHTML = eval(My_1)[4];
+
+            Want1.innerHTML = My.rowIndex;
+            Want2.innerHTML = "Want";
+            Want3.innerHTML = eval(Want_1)[0];
+            Want4.innerHTML = "4";
+            Want5.innerHTML = "5";
+            Want6.innerHTML = "6";
+            Want7.innerHTML = "7";
+
+            //td를 tr에 삽입 -> td를 tr의 자식요소로 만들어야한다.
+            My.appendChild(My1);
+            My.appendChild(My2);
+            My.appendChild(My3);
+            My.appendChild(My4);
+            My.appendChild(My5);
+            My.appendChild(My6);
+            My.appendChild(My7);
+
+            Want.appendChild(Want1);
+            Want.appendChild(Want2);
+            Want.appendChild(Want3);
+            Want.appendChild(Want4);
+            Want.appendChild(Want5);
+            Want.appendChild(Want6);
+            Want.appendChild(Want7);
+
+            //원하는 테이블의 원하는 장소에 자식요소로 만들기.
+            var table = document.getElementById("add_table"); //테이블의 아이디를 이용
+
+            //3번째 자식 요소를 얻어내서 추가해야한다.(tbody를 3번째로 만들어 놓음)
+            var tbody = table.children[2];
+            //여기에 값넣기.
+            tbody.appendChild(My);
+            tbody.appendChild(Want);
+        }
+
+    </script>
+
+    <div id="container">
+        <div id="header">
+            <img src="images/logo.png" alt="로고">
+            <div id="topMenu">
+                <input type="radio" name="menuLink" id="menu1">
+                <label class="menu1" for="menu1">수강교환</label>
+                <input type="radio" name="menuLink" id="menu2" checked>
+                <label class="menu2" for="menu2">수강등록</label>
+                <input type="radio" name="menuLink" id="menu3">
+                <label class="menu3" for="menu3">시간표</label>
+                <input type="radio" name="menuLink" id="menu4">
+                <label class="menu4" for="menu4">사용법</label>
+
+                <div id="Timetable">
+                    <table style=width:100%>
+
+
+                        <tr>
+                            <th> </th>
+                            <th>월</th>
+                            <th>화</th>
+                            <th>수</th>
+                            <th>목</th>
+                            <th>금</th>
+                        </tr>
+                        <tr>
+                            <th>1교시</th>
+                            <td></td>
+                            <td></td>
+                            <td style="background : LavenderBlush ;" rowspan="4">c언어응용프로그래밍</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>2교시</th>
+                            <td style="background : Plum  ;" rowspan="2">웹프로그래밍</td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>3교시</th>
+                            <td style="background : LightCyan;">대학예배</td>
+                            <td style="background : Lavender;" rowspan="2">실전 영어회화(B)</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>4교시</th>
+                            <td> </td>
+                            <td></td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>5교시</th>
+                            <td></td>
+                            <td style="background : Salmon  ;" rowspan="2">자료구조론</td>
+                            <td></td>
+                            <td style="background : Wheat   ;">성경과 인간이해2</td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>6교시</th>
+                            <td style="background : Lavender;" rowspan="3">소프트웨어공학</td>
+                            <td style="background : MintCream;" rowspan="4">유닉스시스템</td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>7교시</th>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>8교시</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>9교시</th>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <th>10교시</th>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="exchange">
+                    <div class="search">
+
+                    </div>
+
+                    <div class="apply">
+
+                    </div>
+                </div>
+
+                <div id="enrollment">
+                    <fieldset>
+                        <form name=signform>
+                            <label for="My_subject"><strong>내 과목</strong></label>
+                            <select name="My_subject" id="My_subject">
+                                <option value="웹프로그래밍">웹프로그래밍</option>
+                                <option value="소프트웨어공학">소프트웨어공학</option>
+                                <option value="대학예배">대학예배</option>
+                                <option value="자료구조론">자료구조론</option>
+                                <option value="유닉스시스템">유닉스시스템</option>
+                                <option value="C언어응용프로그래밍">C언어응용프로그래밍</option>
+                                <option value="실전영어회화">실전영어회화(B)</option>
+                                <option value="성경과인간이해2">성경과인간이해2</option>
+                            </select>
+                            <label for=""><strong>원하는 과목</strong></label>
+                            <label for="">구분</label>
+                            <select name=bigsubject
+                                onChange=javascript:bigsubjectchange(document.signform.bigsubject.options.selectedIndex);>
+                                <option selected value="">-선택-</option>
+                                <option value=전공>전공</option>
+                                <option value=교양>교양</option>
+                            </select>
+                            <label for="">학부/전공</label>
+                            <select name=big_subject size=1
+                                onChange=javascript:subjectchange(document.signform.big_subject.options.selectedIndex);>
+                                <option selected value="">-선택-</option>
+                                <option value=""></option>
+                            </select>
+                            <label for="">과목</label>
+                            <select name=subject id="subject" size=1>
+                                <option selected value="">-선택-</option>
+                                <option value=""></option>
+                            </select>
+                            <input type="button" value="등록" onclick="add()" />
+                        </form>
+                    </fieldset>
+                    <fieldset>
+                        <table id="add_table">
+                            <thead>
+                                <th>No.</th>
+                                <th>Type</th>
+                                <th>강좌코드</th>
+                                <th>과목명</th>
+                                <th>학점</th>
+                                <th>담당교수</th>
+                                <th>강의시간/강의실</th>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                            <tbody></tbody>
+                        </table>
+                    </fieldset>
+                </div>
+
+                <div id="use">
+
+                    <fieldset>
+                        <ul>
+                            <li style="font-style: italic;"> <strong>수강 교환</strong>
+                                <ol>
+                                    <li>내가 갖고 있는 교환하고 싶은 과목을 선택합니다.</li>
+                                    <li>상대방이 갖고 있는 교환하고 싶은 과목을 선택합니다.</li>
+                                    <li>검색 버튼을 누릅니다.</li>
+                                    <li>수강시장에 다른 사람이 교환 할 과목을 등록했으면 검색이 됩니다.</li>
+                                    <li>교환신청을 누르고 상대방이 수락을 누르면 교환이 완료됩니다.</li>
+                                </ol>
+                            </li>
+                            <hr />
+                            <li style="font-style: italic;"><strong>수강 등록</strong>
+                                <ol>
+                                    <li>내가 갖고 있는 교환하고 싶은 과목을 선택합니다.</li>
+                                    <li>상대방이 갖고 있는 교환하고 싶은 과목을 선택합니다.</li>
+                                    <li>등록 버튼을 누르면 수강시장에 교환 할 과목이 등록 됩니다.</li>
+                                    <li>상대방이 확인 후 교환신청을 누르고 내가 수락을 누르면 교환이 완료됩니다.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="login">
+        <fieldset>
+            <legend>Login</legend>
+            <ul>
+                <li><label for="">아이디</label> <br> <input id="LoginId" type="loginId" placeholder="아이디"></li>
+                <li><label for="">패스워드</label> <br> <input id="LoginPw" type="password" placeholder="패스워드"></li>
+                <li><button class="loginBt" onclick="OnLogin()">로그인</button></li>
+                <li><a target="_blank"
+                        href="https://www.bu.ac.kr/web/3514/subview.do?enc=Zm5jdDF8QEB8JTJGdXNlckluZm9TZWFyY2glMkZ3ZWIlMkZpZFNlYXJjaFZpZXcuZG8lM0Y%3D">아이디/비밀번호
+                        찾기</a></li>
+            </ul>
+        </fieldset>
+    </div>
+    <div id="login-1">
+        <fieldset>
+            <legend>Login</legend>
+            <img src="images/profile.png" alt="프로필이미지" style="width: 100px; margin-left: 50px;">
+            <p style="margin-block-end: 0px; text-align: center;"><b>admin</b>님 환영합니다.</p>
+            <button class="logoutBt" onclick="OnLogout()" style="margin-left: 22px;">로그아웃</button>
+
+        </fieldset>
+    </div>
+
+    <div id="notice">
+        <fieldset>
+            <p style="text-align: center; color: red;"><b>수강정정기간</b</p><br>
+                    <p style="font-size: 3px;">2020년 2월 10일 - 2020년 2월 15일</p><br>
+                    <p style="font-size: 3px; color: blue;">※지정된 선이수학점을 이수해야만 졸업이 가능합니다.</p><br>
+                    <p style="font-size: 3px; color: blue;">※2학기 개설되는 멘토 교과목은 최대 수강신청 학점에 포함되지 않습니다.</p>
+        </fieldset>
+    </div>
+
+    </div>
+
+</body>
+
+</html>

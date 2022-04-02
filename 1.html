@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+
+<table id = "mytable">
+  <thead>
+   <th>번호</th>
+   <th>이름</th>
+   <th>전화</th>  
+  </thead>
+  <tfoot>
+   <td colspan="3" allign="right" >
+    <input type="button" value="추가" onclick="add()"/>
+   </td>  
+  </tfoot>
+  <tbody></tbody>
+ </table>
+
+
+
+
+<style type="text/css">
+ #mytable{
+ border: 1px solid;
+ width:600px;
+ }
+</style>
+
+
+
+
+
+<script type="text/javascript">
+
+var Business_science = ["박성민","정상준"];
+
+ function add(){
+  var tr_obj = document.createElement("tr"); // tr엘리먼트 생성 <tr></tr>
+  var td_obj1 = document.createElement("td"); // td엘리먼트 생성 <td></td>
+  var td_obj2 = document.createElement("td"); // <td></td>
+  var td_obj3 = document.createElement("td"); // <td></td>
+ 
+  //td에 값넣기위해서 innerHTML사용
+  td_obj1.innerHTML = Business_science[0];
+  td_obj2.innerHTML = Business_science[1];
+  td_obj3.innerHTML = "010-111-1111";
+  
+  //td를 tr에 삽입 -> td를 tr의 자식요소로 만들어야한다.
+  tr_obj.appendChild(td_obj1);
+  tr_obj.appendChild(td_obj2);
+  tr_obj.appendChild(td_obj3);
+  
+  //원하는 테이블의 원하는 장소에 자식요소로 만들기.
+  var table = document.getElementById("mytable"); //테이블의 아이디를 이용
+  
+  //3번째 자식 요소를 얻어내서 추가해야한다.(tbody를 3번째로 만들어 놓음)
+  var tbody = table.children[2];
+  //여기에 값넣기.
+  tbody.appendChild(tr_obj);
+ }
+</script>
+
+
+
+</body>
+</html>
